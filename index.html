@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustentación - CRISIS72</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent: #f97316; /* Naranja corporativo */
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --slide-transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden; /* Evita el scroll, usamos navegación JS */
+        }
+
+        /* --- Contenedor de Slides --- */
+        .slider-container {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--slide-transition);
+            transform: scale(0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            z-index: 10;
+        }
+
+        /* --- Tipografía y Estructura --- */
+        h1 { font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 1rem; color: white; }
+        h1 span { color: var(--accent); }
+        h2 { font-size: 2.5rem; margin-bottom: 2rem; border-left: 5px solid var(--accent); padding-left: 20px; }
+        h3 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 1rem; }
+        p { font-size: 1.2rem; color: var(--text-dim); max-width: 800px; line-height: 1.6; margin-bottom: 2rem; }
+
+        /* --- Componentes Visuales --- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .card i { font-size: 2rem; color: var(--accent); margin-bottom: 1rem; }
+
+        /* --- Mockup del Simulador (Visual) --- */
+        .browser-mockup {
+            background: #000;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 1px solid #333;
+            width: 100%;
+        }
+        .browser-header {
+            background: #222;
+            padding: 10px 15px;
+            display: flex;
+            gap: 8px;
+        }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: #555; }
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+        
+        .sim-screen { padding: 20px; text-align: left; font-family: 'Roboto Mono', monospace; }
+        .progress-bar { height: 6px; background: #333; border-radius: 3px; margin: 10px 0; overflow: hidden; }
+        .fill { height: 100%; background: var(--accent); width: 0%; animation: load 2s ease-out forwards; }
+
+        @keyframes load { to { width: 75%; } }
+
+        /* --- Controles de Navegación --- */
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+            align-items: center;
+        }
+        .btn-nav {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn-nav:hover { background: var(--accent); border-color: var(--accent); }
+        .page-indicator { font-family: 'Roboto Mono'; color: var(--text-dim); font-size: 0.9rem; }
+
+        /* --- Animaciones de Entrada --- */
+        .animate-up { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .slide.active .animate-up { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+ /* Agrega esto al final del estilo para ocultar controles al grabar */
+.controls {
+    display: none !important; /* Oculta los botones y el contador */
+}
+body {
+    cursor: none; /* Oculta el ratón (muévelo para que reaparezca si lo necesitas) */
+}
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Portada -->
+    <div class="slide active" id="slide-1">
+        <h3 class="animate-up">Proyecto Final</h3>
+        <h1 class="animate-up delay-1">CRISIS<span>72</span></h1>
+        <p class="animate-up delay-2" style="font-size: 1.5rem; text-align: center;">
+            Simulador de Continuidad de Negocio y Gestión de Crisis<br>
+            Basado en la Norma ISO 22301
+	    Curso: Manejo de Emergencias y Contingencias
+            Facilitadora : Yesenia Barría
+	
+        </p>
+        
+        <!-- Sección de Integrantes -->
+        <div class="animate-up delay-3" style="margin-top: 4rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+            <h4 style="color: var(--accent); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1rem;">Presentado por:</h4>
+            <div style="display: flex; gap: 2rem; justify-content: center; font-size: 1.1rem; font-weight: 500;">
+                <span>Jaime Meneses</span>
+                <span style="color: var(--accent);">|</span>
+                <span>Roy Cortizo</span>
+                <span style="color: var(--accent);">|</span>
+                <span>Jorge Fong</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: El Problema -->
+    <div class="slide" id="slide-2">
+        <div class="grid-2">
+            <div style="text-align: left;">
+                <h3 class="animate-up">El Problema</h3>
+                <h2 class="animate-up delay-1">La brecha entre la teoría y la realidad</h2>
+                <p class="animate-up delay-2">
+                    Las capacitaciones tradicionales en gestión de riesgos son pasivas y teóricas. 
+                    Los estudiantes y profesionales conocen la norma, pero <strong>fallan al aplicarla bajo presión</strong>.
+                </p>
+                <div class="card animate-up delay-3" style="border-left: 4px solid #ef4444;">
+                    <strong>Estadística Clave:</strong><br>
+                    El 70% de las empresas sin un plan de continuidad probado cierran dentro de los 18 meses posteriores a un desastre mayor.
+                </div>
+            </div>
+            <div class="animate-up delay-2">
+                <i class="fas fa-exclamation-triangle" style="font-size: 15rem; color: rgba(255,255,255,0.05);"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: La Solución (Demo) -->
+    <div class="slide" id="slide-3">
+        <h3 class="animate-up">La Solución</h3>
+        <h2 class="animate-up delay-1">Aprendizaje Basado en Simulación</h2>
+        
+        <div class="browser-mockup animate-up delay-2" style="max-width: 800px;">
+            <div class="browser-header">
+                <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+            </div>
+            <div class="sim-screen">
+                <div style="display:flex; justify-content:space-between; color:#888; font-size:0.8rem; margin-bottom:10px;">
+                    <span>STATUS: CRÍTICO</span>
+                    <span>T+ 02:00 HORAS</span>
+                </div>
+                <div style="color:white; font-size:1.2rem; margin-bottom:20px;">
+                    > EVENTO ENTRANTE: CIBERATAQUE RANSOMWARE DETECTADO.<br>
+                    > SISTEMAS DE PAGO BLOQUEADOS.<br>
+                    > ¿ACCIÓN REQUERIDA?
+                </div>
+                
+                <div style="background:#222; padding:10px; margin-bottom:5px; border-left:3px solid var(--accent);">
+                    A. Pagar el rescate (Riesgo Legal)
+                </div>
+                <div style="background:#222; padding:10px; margin-bottom:5px; border-left:3px solid #555;">
+                    B. Desconectar red global (Impacto Operativo)
+                </div>
+
+                <div style="margin-top:20px;">
+                    <span style="color:#888; font-size:0.8rem;">Integridad de Datos</span>
+                    <div class="progress-bar"><div class="fill"></div></div>
+                </div>
+            </div>
+        </div>
+        <p class="animate-up delay-3" style="margin-top: 2rem; font-size: 1rem;">
+            Entorno seguro para fallar, aprender y mejorar la toma de decisiones.
+        </p>
+    </div>
+
+    <!-- Slide 4: Metodología -->
+    <div class="slide" id="slide-4">
+        <h3 class="animate-up">Marco Teórico</h3>
+        <h2 class="animate-up delay-1">Alineación con ISO 22301</h2>
+        
+        <div class="grid-2 animate-up delay-2" style="gap: 2rem;">
+            <div class="card">
+                <i class="fas fa-chess-board"></i>
+                <h4>Liderazgo (Cl. 5)</h4>
+                <p style="font-size:0.9rem;">Evaluación de la capacidad de tomar el control y priorizar la seguridad humana.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-clipboard-check"></i>
+                <h4>Planificación (Cl. 6)</h4>
+                <p style="font-size:0.9rem;">Uso de protocolos preexistentes vs. improvisación reactiva.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-cogs"></i>
+                <h4>Operación (Cl. 8)</h4>
+                <p style="font-size:0.9rem;">Gestión de recursos finitos (tiempo, energía, personal) bajo estrés.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-chart-line"></i>
+                <h4>Evaluación (Cl. 9)</h4>
+                <p style="font-size:0.9rem;">Auditoría automática post-incidente con retroalimentación inmediata.</p>
+            </div>
+        </div>
+    </div>
+<!-- Slide 5 MODIFICADO: Enfoque Ingenieril -->
+    <div class="slide" id="slide-5">
+        <h3 class="animate-up">Ingeniería del Proyecto</h3>
+        <h2 class="animate-up delay-1">Lógica y Funcionalidad</h2>
+        <div class="grid-2 animate-up delay-2" style="gap: 2rem;">
+            <!-- Tarjeta 1 -->
+            <div class="card" style="border-left: 3px solid #22c55e;">
+                <i class="fas fa-network-wired" style="color:#22c55e;"></i>
+                <h4>Árbol de Decisiones</h4>
+                <p style="font-size:0.9rem;">Algoritmo basado en consecuencias probabilísticas (Causa-Efecto) según matrices de riesgo.</p>
+            </div>
+            <!-- Tarjeta 2 -->
+            <div class="card" style="border-left: 3px solid #facc15;">
+                <i class="fas fa-stopwatch" style="color:#facc15;"></i>
+                <h4>Presión Temporal</h4>
+                <p style="font-size:0.9rem;">Temporizadores reales para evaluar la respuesta bajo estrés fisiológico y cognitivo.</p>
+            </div>
+            <!-- Tarjeta 3 -->
+            <div class="card" style="border-left: 3px solid #3b82f6;">
+                <i class="fas fa-file-contract" style="color:#3b82f6;"></i>
+                <h4>Auditoría Automática</h4>
+                <p style="font-size:0.9rem;">Generación de reportes PDF alineados a métricas de cumplimiento ISO.</p>
+            </div>
+            <!-- Tarjeta 4 -->
+            <div class="card" style="border-left: 3px solid #ef4444;">
+                <i class="fas fa-laptop-medical" style="color:#ef4444;"></i>
+                <h4>Accesibilidad</h4>
+                <p style="font-size:0.9rem;">Plataforma web multiplataforma (PC/Tablet) para entrenamiento remoto.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Tecnologías -->
+    <div class="slide" id="slide-6">
+        <h3 class="animate-up">Arquitectura Técnica</h3>
+        <h2 class="animate-up delay-1">Diseño y Desarrollo</h2>
+        <ul class="animate-up delay-2" style="list-style: none; font-size: 1.5rem; line-height: 2.5;">
+            <li><i class="fab fa-html5" style="color:var(--accent); width:40px;"></i> <strong>HTML5 / CSS3:</strong> Diseño Responsivo y Moderno.</li>
+            <li><i class="fab fa-js" style="color:#f7df1e; width:40px;"></i> <strong>JavaScript ES6+:</strong> Lógica de eventos y temporizadores.</li>
+            <li><i class="fas fa-robot" style="color:#22d3ee; width:40px;"></i> <strong>Lógica Difusa:</strong> Los resultados no son binarios, dependen del contexto.</li>
+            <li><i class="fas fa-file-pdf" style="color:#ef4444; width:40px;"></i> <strong>Generación de Reportes:</strong> Feedback descargable para el alumno.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 6: Conclusión -->
+    <div class="slide" id="slide-6">
+        <h1 class="animate-up">Conclusiones</h1>
+        <p class="animate-up delay-1">
+            CRISIS72 transforma la capacitación pasiva en una experiencia activa de aprendizaje.
+        </p>
+        <div class="animate-up delay-2" style="display: flex; gap: 20px;">
+            <a href="https://crisis72-2e2b1.web.app/" target="_blank" style="text-decoration: none;">
+                <button style="background: var(--accent); color: white; border: none; padding: 15px 40px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s;">
+                    <i class="fas fa-external-link-alt"></i> Ver Demo en Vivo
+                </button>
+            </a>
+        </div>
+        <p class="animate-up delay-3" style="margin-top: 3rem; font-size: 0.9rem; opacity: 0.6;">
+            Gracias por su atención<br>
+            Sesión de Preguntas y Respuestas
+        </p>
+    </div>
+
+    <!-- Controles -->
+    <div class="controls">
+        <span class="page-indicator" id="page-indicator">1 / 6</span>
+        <button class="btn-nav" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+        <button class="btn-nav" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const indicator = document.getElementById('page-indicator');
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                }
+            });
+            indicator.innerText = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+    </script>
+</body>
+</html>

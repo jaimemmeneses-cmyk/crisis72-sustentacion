@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - CRISIS72</title>
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Colores Base del Primer Código */
+            --primary: #1a2233; 
+            --accent: #ff5722; 
+            --bg-light: #f4f6f9;
+            --text-main: #333333;
+            --text-light: #666666;
+            --border-radius: 8px;
+            
+            /* Colores Adicionales para Reportes */
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            line-height: 1.6;
+        }
+
+        /* --- Barra Lateral de Navegación --- */
+        nav {
+            width: 280px;
+            background-color: var(--primary);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            padding: 2rem 1rem;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        nav h1 {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        nav h2 {
+            font-size: 0.85rem;
+            font-weight: 300;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+
+        nav ul { list-style: none; padding: 0; }
+        nav li { margin-bottom: 0.5rem; }
+
+        nav a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: white;
+            background-color: rgba(255,87,34, 0.2);
+            border-left: 3px solid var(--accent);
+        }
+
+        /* --- Contenido Principal --- */
+        main {
+            margin-left: 280px;
+            padding: 3rem 4rem;
+            max-width: 950px;
+            width: 100%;
+        }
+
+        /* --- Tipografía y Elementos --- */
+        h1.doc-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            border-bottom: 4px solid var(--accent);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-top: 3.5rem;
+            font-size: 1.8rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        h3 { color: #444; margin-top: 2rem; font-weight: 700; }
+        p { margin-bottom: 1rem; color: #4a4a4a; }
+
+        /* --- Mockups (Ilustraciones CSS) --- */
+        .ui-mockup {
+            background: #111;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 2rem 0;
+            color: white;
+            border: 2px solid #333;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .ui-label {
+            position: absolute; top: -10px; right: 20px;
+            background: var(--accent); color: white;
+            font-size: 0.7rem; padding: 2px 8px; border-radius: 4px;
+            text-transform: uppercase; font-weight: bold;
+        }
+        /* Barras de recursos simuladas */
+        .res-container { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        .res-bar-box { flex: 1; }
+        .res-label { font-size: 0.7rem; color: #888; margin-bottom: 3px; }
+        .res-track { height: 6px; background: #333; border-radius: 3px; }
+        .res-fill { height: 100%; border-radius: 3px; }
+
+        /* --- Enlaces a Recursos (Cards) --- */
+        .resource-link {
+            display: flex;
+            align-items: flex-start;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            color: var(--primary);
+            margin: 1rem 0;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .resource-link:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .resource-link i {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: var(--accent);
+            margin-top: 3px;
+        }
+
+        .resource-content h4 { margin: 0 0 5px 0; font-weight: 700; }
+        .resource-content p { margin: 0; font-size: 0.9rem; color: #666; }
+
+        /* --- Tablas (General) --- */
+        .table-wrapper { overflow-x: auto; margin: 2rem 0; border-radius: var(--border-radius); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        table { width: 100%; border-collapse: collapse; background: white; font-size: 0.9rem; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #eee; vertical-align: top; }
+        th { background-color: var(--primary); color: white; }
+        
+        /* Estilos Rúbrica */
+        .score-opt { color: var(--success); font-weight: bold; }
+        .score-def { color: var(--warning); font-weight: bold; }
+        .score-ris { color: var(--danger); font-weight: bold; }
+
+        /* --- Reporte de Caso Real (Estilo Papel) --- */
+        .audit-paper {
+            background: white;
+            padding: 2.5rem;
+            border: 1px solid #ddd;
+            border-top: 5px solid var(--danger); /* Rojo por calificación F */
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-top: 1.5rem;
+        }
+        .audit-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #eee; padding-bottom: 1rem; margin-bottom: 1.5rem; }
+        .audit-score { font-size: 2.2rem; font-weight: 800; color: var(--danger); }
+        .log-table td { font-family: 'Roboto Mono', monospace; font-size: 0.85rem; }
+        .impact-txt { font-weight: 600; }
+
+        /* --- Tarjetas de Escenarios --- */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-top: 3px solid var(--accent);
+            text-align: center;
+        }
+        .card i { font-size: 2rem; margin-bottom: 1rem; color: var(--primary); }
+        .card h4 { margin: 0.5rem 0; color: var(--primary); }
+        .card p { font-size: 0.85rem; margin: 0; }
+
+        /* --- Print Styles --- */
+        @media print {
+            nav { display: none; }
+            main { margin: 0; padding: 0; max-width: 100%; }
+            body { background-color: white; }
+            .ui-mockup, .audit-paper { box-shadow: none; border: 1px solid #ccc; color: black; background: white; }
+            .ui-label { color: black; border: 1px solid black; background: white; }
+            a { text-decoration: none; color: black; }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            nav { display: none; }
+            main { margin-left: 0; padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú Lateral -->
+    <nav>
+        <h1>CRISIS<span style="font-weight:300">72</span></h1>
+        <h2>Manual de Usuario v2.0</h2>
+        <ul>
+            <li><a href="#intro">1. Introducción</a></li>
+            <li><a href="#interfaz">2. Interfaz y Recursos</a></li>
+            <li><a href="#mecanica">3. Mecánica y Escenarios</a></li>
+            <li><a href="#rubrica">4. Rúbrica de Evaluación</a></li>
+            <li><a href="#reporte-real">5. Reporte Auditoría (Ejemplo)</a></li>
+            <li><a href="#iso">6. Feedback ISO 22301</a></li>
+            <li><a href="#bibliografia">7. Recursos y Referencias</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main>
+        <header>
+            <h1 class="doc-title">Manual Oficial y Guía de Auditoría</h1>
+            <p><strong>Simulador de Continuidad de Negocio y Gestión de Crisis (ISO 22301)</strong><br>
+            Este manual integra el funcionamiento técnico del simulador con los criterios de auditoría utilizados para la evaluación automática.</p>
+            
+            <a href="https://crisis72-2e2b1.web.app/" class="resource-link" target="_blank" style="display:inline-flex; width: auto;">
+                <i class="fas fa-external-link-alt"></i> 
+                <div class="resource-content">
+                    <h4>Acceder al Simulador Web</h4>
+                    <p>Haga clic aquí para iniciar sesión en la aplicación.</p>
+                </div>
+            </a>
+        </header>
+
+        <section id="intro">
+            <h2>1. Introducción</h2>
+            <p>El simulador <strong>CRISIS72</strong> es una herramienta interactiva diseñada para entrenar a estudiantes y líderes empresariales en la toma de decisiones críticas durante las primeras 72 horas de un desastre. Evalúa la resiliencia en relación con los principios de la norma <strong>ISO 22301</strong>.</p>
+            
+            <div class="ui-mockup" style="text-align: center; padding: 3rem;">
+                <span class="ui-label">Pantalla de Inicio</span>
+                <h1 style="color: var(--accent); font-size: 2.5rem; margin:0;">CRISIS72</h1>
+                <p style="color: #888;">Simulador de Continuidad de Negocio</p>
+                <div style="margin-top: 20px;">
+                    <span style="background: var(--accent); color: white; padding: 10px 25px; border-radius: 20px; font-weight: bold;">INICIAR SIMULACIÓN</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="interfaz">
+            <h2>2. Interfaz y Gestión de Recursos</h2>
+            <p>El simulador presenta un tablero de control donde el usuario debe vigilar los activos críticos de la organización.</p>
+
+            <div class="ui-mockup">
+                <span class="ui-label">Interfaz Principal</span>
+                <!-- Barras Superiores -->
+                <div class="res-container">
+                    <div class="res-bar-box">
+                        <div class="res-label">PERSONAL (Salud)</div>
+                        <div class="res-track"><div class="res-fill" style="width: 85%; background: #22c55e;"></div></div>
+                    </div>
+                    <div class="res-bar-box">
+                        <div class="res-label">TI / DATOS</div>
+                        <div class="res-track"><div class="res-fill" style="width: 45%; background: #ef4444;"></div></div>
+                    </div>
+                    <div class="res-bar-box">
+                        <div class="res-label">ENERGÍA</div>
+                        <div class="res-track"><div class="res-fill" style="width: 60%; background: #f59e0b;"></div></div>
+                    </div>
+                    <div class="res-bar-box">
+                        <div class="res-label">REPUTACIÓN</div>
+                        <div class="res-track"><div class="res-fill" style="width: 90%; background: #3b82f6;"></div></div>
+                    </div>
+                </div>
+                <!-- Área de Narrativa -->
+                <div style="padding: 0 10px;">
+                    <p style="color: #aaa; font-size: 0.8rem; margin-bottom:5px;">T+ 04:00 HORAS | EVENTO: INCENDIO ESTRUCTURAL</p>
+                    <h3 style="color: white; margin-top: 0;">Evento Crítico #3: Falla de Servidores</h3>
+                    <p>El fuego ha alcanzado el cableado principal. ¿Qué acción prioriza?</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="background: #222; padding: 10px; margin-bottom: 5px; border-radius: 4px; border-left: 3px solid #555;">A. Enviar brigada a apagar (Riesgo Humano Alto)</li>
+                        <li style="background: #222; padding: 10px; margin-bottom: 5px; border-radius: 4px; border-left: 3px solid #555;">B. Apagado remoto (Pérdida Operativa)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="mecanica">
+            <h2>3. Mecánica y Escenarios</h2>
+            <h3>Dinámica del Juego</h3>
+            <p>El objetivo es sobrevivir 72 horas virtuales. Cada decisión avanza el reloj y afecta los recursos. Existen decisiones irreversibles y "puntos de no retorno".</p>
+            
+            <h3>Escenarios Disponibles</h3>
+            <div class="scenario-grid">
+                <div class="card">
+                    <i class="fas fa-house-crack"></i>
+                    <h4>Terremoto</h4>
+                    <p>Infraestructura y rutas dañadas.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-water"></i>
+                    <h4>Inundación</h4>
+                    <p>Accesos bloqueados y daños físicos.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-user-secret"></i>
+                    <h4>Ransomware</h4>
+                    <p>Secuestro de datos y extorsión.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-fire"></i>
+                    <h4>Incendio</h4>
+                    <p>Evacuación y destrucción de activos.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Falla Energía</h4>
+                    <p>Colapso de servicios nacionales.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="rubrica">
+            <h2>4. Rúbrica de Evaluación del Desempeño</h2>
+            <p>El sistema califica automáticamente basándose en la norma <strong>ISO 22301:2019</strong>. A continuación se detalla la matriz de evaluación utilizada:</p>
+            
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Nivel / Score</th>
+                            <th style="width: 25%;">Criterio: Liderazgo (Cláusula 5)</th>
+                            <th style="width: 25%;">Criterio: Planificación (Cláusula 6)</th>
+                            <th style="width: 35%;">Resultado Esperado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="score-opt">OPTIMIZADO<br>90 - 100 pts</td>
+                            <td>Toma de decisiones proactiva. Prioriza la vida humana y la integridad ética.</td>
+                            <td>Activa protocolos pre-existentes en < 5 min. Estrategia clara de recuperación (RTO/RPO cumplidos).</td>
+                            <td>Resiliencia total. La empresa opera en modo contingencia sin pérdida de reputación significativa.</td>
+                        </tr>
+                        <tr>
+                            <td class="score-def">DEFINIDO<br>75 - 89 pts</td>
+                            <td>Liderazgo visible pero reactivo en momentos de alta presión.</td>
+                            <td>Existen planes pero la activación es lenta. Se improvisan soluciones logísticas.</td>
+                            <td>Impacto financiero moderado. La empresa sobrevive pero requiere auditoría post-incidente.</td>
+                        </tr>
+                        <tr>
+                            <td class="score-ris">RIESGOSO<br>< 59 pts (Fallo)</td>
+                            <td>Liderazgo inconsistente o ausente. Pánico en la toma de decisiones. Prioridades invertidas.</td>
+                            <td>Falta de planes de contingencia. Respuestas impulsivas sin análisis de impacto (BIA).</td>
+                            <td>Cierre de operaciones, sanciones legales o quiebra técnica. Pérdida catastrófica de infraestructura.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="reporte-real">
+            <h2>5. Ejemplo de Reporte Generado (Caso Real)</h2>
+            <p>El siguiente documento muestra un ejemplo real extraído del simulador correspondiente a una sesión fallida.</p>
+
+            <div class="audit-paper">
+                <div class="audit-header">
+                    <div>
+                        <h3 style="margin:0; color:var(--primary);">Reporte de Auditoría ISO 22301</h3>
+                        <p style="margin:0; color:#666; font-size:0.9rem;">ID Sesión: #FIRE-2025-X92 | Fecha: 25/11/2025</p>
+                    </div>
+                    <div class="audit-score">CALIFICACIÓN: F (25/100)</div>
+                </div>
+
+                <h4>Resumen Ejecutivo</h4>
+                <p style="text-align: justify; font-size: 0.95rem;">
+                    La simulación detalla una respuesta inadecuada a un incendio severo, escalando a la pérdida catastrófica de infraestructura de TI y datos críticos. A pesar de una activación inicial de protocolo, la falta de planificación robusta para la recuperación de TI y la comunicación reactiva condujeron a un deterioro continuo. La situación se agravó por fallos en el centro secundario.
+                </p>
+
+                <h4>Registro de Decisiones (Extracto del Log)</h4>
+                <div class="table-wrapper">
+                    <table class="log-table">
+                        <thead>
+                            <tr>
+                                <th>Paso</th>
+                                <th>Decisión</th>
+                                <th>Tiempo (s)</th>
+                                <th>Impacto Clave (P=Personal, E=Empresa)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Paso 1</td>
+                                <td>Activar protocolo de emergencia interno</td>
+                                <td>12.2s</td>
+                                <td>P:100% E:90%</td>
+                            </tr>
+                            <tr>
+                                <td>Paso 6</td>
+                                <td>Establecer urgentemente centro de operaciones</td>
+                                <td>65.0s</td>
+                                <td>P:89% <span style="color:var(--warning);">E:60%</span></td>
+                            </tr>
+                            <tr>
+                                <td>Paso 9</td>
+                                <td>Iniciar evacuación parcial del centro alterno</td>
+                                <td>55.5s</td>
+                                <td>P:98% <span style="color:var(--danger);">E:47%</span></td>
+                            </tr>
+                            <tr>
+                                <td>Paso 11</td>
+                                <td>Declarar moratoria inmediata de operaciones</td>
+                                <td>72.5s</td>
+                                <td>P:81% <span style="color:var(--danger);">E:40%</span></td>
+                            </tr>
+                            <tr style="background:#fff1f2;">
+                                <td>Paso 12</td>
+                                <td>Intentar un último y arriesgado reinicio</td>
+                                <td>52.6s</td>
+                                <td>P:66% <span style="color:var(--danger); font-weight:bold;">E:20% (COLAPSO)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>Análisis de Cláusulas (Fallo)</h4>
+                <ul>
+                    <li><strong>Cláusula 5 (Liderazgo):</strong> Consistencia muy baja. Las decisiones para "mejorar la moral" fueron tardías.</li>
+                    <li><strong>Cláusula 6 (Planificación):</strong> Respuestas impulsivas. Adquisición de equipos temporales fue meramente reactiva.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="iso">
+            <h2>6. Feedback ISO 22301</h2>
+            <p>Al finalizar la simulación, el sistema genera retroalimentación específica cruzando las decisiones del usuario con las cláusulas de la norma:</p>
+            <ul>
+                <li><strong>Contexto de la organización (Cl. 4):</strong> ¿Entendió qué activos eran vitales?</li>
+                <li><strong>Liderazgo (Cl. 5):</strong> ¿Asumió responsabilidad o delegó excesivamente?</li>
+                <li><strong>Soporte y Recursos (Cl. 7):</strong> ¿Gestionó la fatiga del personal y las comunicaciones?</li>
+                <li><strong>Evaluación del Desempeño (Cl. 9):</strong> Capacidad de monitorear la crisis en tiempo real.</li>
+            </ul>
+        </section>
+
+        <section id="bibliografia">
+            <h2>7. Bibliografía y Recursos Oficiales</h2>
+            
+            <a href="https://www.iso.org/standard/75106.html" target="_blank" class="resource-link">
+                <i class="fas fa-globe"></i>
+                <div class="resource-content">
+                    <h4>ISO 22301:2019 - Security and resilience</h4>
+                    <p>Estándar oficial. El enlace permite ver la introducción y alcance de forma legal.</p>
+                </div>
+            </a>
+
+            <a href="https://training.fema.gov/emi.aspx" target="_blank" class="resource-link">
+                <i class="fas fa-university"></i>
+                <div class="resource-content">
+                    <h4>FEMA Emergency Management Institute (EMI)</h4>
+                    <p>Cursos gratuitos sobre NIMS e ICS, base de la gestión de emergencias.</p>
+                </div>
+            </a>
+
+            <a href="https://www.nist.gov/cyberframework" target="_blank" class="resource-link">
+                <i class="fas fa-shield-alt"></i>
+                <div class="resource-content">
+                    <h4>NIST Cybersecurity Framework (CSF)</h4>
+                    <p>Marco de referencia para gestión de riesgos de ciberseguridad (Ver 2.0).</p>
+                </div>
+            </a>
+
+            <!-- ENLACE ACTUALIZADO SEGÚN SOLICITUD -->
+            <a href="https://emergency.unhcr.org/es" target="_blank" class="resource-link">
+                <i class="fas fa-hands-helping"></i>
+                <div class="resource-content">
+                    <h4>ACNUR - Manual de Emergencia (UNHCR)</h4>
+                    <p>Guía completa para la respuesta humanitaria y gestión de emergencias ágil y eficaz.</p>
+                </div>
+            </a>
+        </section>
+
+        <footer style="margin-top: 4rem; border-top: 1px solid #ccc; padding-top: 2rem; font-size: 0.8rem; color: #666; text-align: center;">
+            <p>&copy; 2025 CRISIS72 Simulator. Todos los derechos reservados.</p>
+        </footer>
+    </main>
+
+    <script>
+        // Script para navegación suave y resaltar menú activo
+        const sections = document.querySelectorAll("section");
+        const navLi = document.querySelectorAll("nav ul li a");
+
+        window.onscroll = () => {
+            var current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute("id");
+                }
+            });
+            navLi.forEach((a) => {
+                a.classList.remove("active");
+                if (a.getAttribute("href").includes(current)) {
+                    a.classList.add("active");
+                }
+            });
+        };
+    </script>
+</body>
+</html>
