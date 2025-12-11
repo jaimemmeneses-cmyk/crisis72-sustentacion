@@ -35,7 +35,7 @@
             transition: opacity var(--slide-transition), transform var(--slide-transition);
             transform: scale(0.95);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            padding: 2rem 4rem; /* Ajustado padding */
+            padding: 2rem 4rem;
             background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
             overflow-y: auto;
         }
@@ -73,7 +73,7 @@
         /* --- Video Container --- */
         .video-wrapper {
             position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0; width: 100%; max-width: 900px;
-            background: #000; border-radius: 15px; border: 2px solid #333; overflow: hidden;
+            background: #000; border-radius: 15px; border: 2px solid #333; overflow: hidden; margin-top: 1rem;
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
@@ -147,7 +147,7 @@
         </div>
     </div>
 
-    <!-- Slide 3: ¿Qué es? (NUEVO) -->
+    <!-- Slide 3: ¿Qué es? -->
     <div class="slide" id="slide-3">
         <h3 class="animate-up">Definición</h3>
         <h2 class="animate-up delay-1">¿Qué es CRISIS72?</h2>
@@ -168,7 +168,7 @@
         </div>
     </div>
 
-    <!-- Slide 4: Escenarios (NUEVO) -->
+    <!-- Slide 4: Escenarios -->
     <div class="slide" id="slide-4">
         <h3 class="animate-up">Mecánica</h3>
         <h2 class="animate-up delay-1">Selección del Escenario</h2>
@@ -188,85 +188,86 @@
         </div>
     </div>
 
-    <!-- Slide 5: Recursos (NUEVO) -->
+    <!-- Slide 5: Recursos (MEJORADO) -->
     <div class="slide" id="slide-5">
-        <h3 class="animate-up">Interfaz</h3>
-        <h2 class="animate-up delay-1">Gestión de Recursos</h2>
-        <p class="animate-up delay-2">Es un juego de <strong>Suma Cero</strong>. Para proteger un recurso, a menudo debes sacrificar otro. Si un indicador llega a 0%, es Game Over.</p>
+        <h3 class="animate-up">Capacitación</h3>
+        <h2 class="animate-up delay-1">Gestión de la Escasez</h2>
+        <p class="animate-up delay-2">En una emergencia real, los recursos son finitos. El simulador enseña al gerente a <strong>equilibrar prioridades conflictivas</strong> bajo estrés.</p>
         
         <div class="grid-2 animate-up delay-3" style="gap: 1.5rem;">
             <div class="card">
                 <i class="fas fa-users"></i>
-                <h4>Personal</h4>
-                <p>Salud física y psicológica de los empleados.</p>
+                <h4>Capital Humano</h4>
+                <p>No son solo números. Si la fatiga o el pánico suben, la capacidad de respuesta operativa cae.</p>
             </div>
             <div class="card">
                 <i class="fas fa-server"></i>
-                <h4>Infraestructura</h4>
-                <p>Capacidad operativa y datos técnicos.</p>
+                <h4>Activos Críticos</h4>
+                <p>Gestionar la infraestructura de TI y Datos mientras el edificio está comprometido.</p>
             </div>
             <div class="card">
                 <i class="fas fa-globe"></i>
-                <h4>Reputación</h4>
-                <p>Imagen pública ante la sociedad.</p>
+                <h4>Imagen Pública</h4>
+                <p>Manejo de prensa y redes sociales. El silencio se interpreta como incompetencia.</p>
             </div>
             <div class="card">
                 <i class="fas fa-coins"></i>
-                <h4>Finanzas</h4>
-                <p>Recursos para gastar en la emergencia.</p>
+                <h4>Viabilidad Financiera</h4>
+                <p>¿Gastar todo el presupuesto en la hora 1 o reservar para la recuperación?</p>
             </div>
         </div>
     </div>
 
-    <!-- Slide 6: Toma de Decisiones (NUEVO) -->
+    <!-- Slide 6: Toma de Decisiones (MEJORADO) -->
     <div class="slide" id="slide-6">
-        <h3 class="animate-up">Núcleo</h3>
-        <h2 class="animate-up delay-1">Mecánica de Decisión</h2>
-        <div class="grid-2 animate-up delay-2">
+        <h3 class="animate-up">Entrenamiento</h3>
+        <h2 class="animate-up delay-1">Dilemas Gerenciales</h2>
+        <p class="animate-up delay-2">Entrenamos el "músculo de decisión". Las opciones nunca son perfectas; enseñamos a elegir el <strong>"mal menor"</strong>.</p>
+        
+        <div class="grid-2 animate-up delay-3">
             <div class="card" style="border-top: 3px solid var(--accent);">
-                <h4>1. El "Inject" (Evento)</h4>
-                <p>El reloj avanza (ej. T+ 04:00) y aparece una situación nueva.</p>
-                <p style="font-size: 0.9rem; color: #aaa; margin-top:0.5rem;"><em>"El fuego se acerca a los servidores..."</em></p>
+                <h4>Ejemplo: Incendio en Data Center</h4>
+                <p>El fuego rodea los servidores principales. Los extintores fallaron.</p>
+                <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-top: 10px;">
+                    <i class="fas fa-exclamation-circle" style="color: #fca5a5; font-size: 1rem;"></i> <strong>El Dilema:</strong> ¿Arriesgas vidas por salvar datos?
+                </div>
             </div>
             <div class="card" style="border-top: 3px solid var(--accent);">
-                <h4>2. El Dilema</h4>
-                <ul class="styled-list" style="font-size: 0.85rem;">
-                    <li><strong>Opción A:</strong> Alto riesgo personal / Salva datos.</li>
-                    <li><strong>Opción B:</strong> Bajo riesgo personal / Pierde datos.</li>
-                    <li><strong>Opción C:</strong> Incertidumbre alta.</li>
+                <h4>Opciones Críticas</h4>
+                <ul class="styled-list" style="font-size: 0.9rem;">
+                    <li><strong>A. Brigada Humana:</strong> Alto riesgo de muerte / Salva la empresa. <span style="color:#ef4444;">(Éticamente cuestionable)</span></li>
+                    <li><strong>B. Corte Total:</strong> Seguridad garantizada / Quiebra técnica por pérdida de datos.</li>
+                    <li><strong>C. Esperar:</strong> La inacción aumenta el desastre.</li>
                 </ul>
             </div>
         </div>
-        <div class="animate-up delay-3" style="margin-top: 2rem; text-align: center;">
-            <div style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 1rem 2rem; border-radius: 50px; border: 1px solid #ef4444; display: inline-flex; align-items: center; gap: 10px;">
-                <i class="fas fa-stopwatch"></i> <strong>Presión de Tiempo:</strong> 2 minutos para decidir.
-            </div>
-        </div>
     </div>
 
-    <!-- Slide 7: Consecuencias (NUEVO) -->
+    <!-- Slide 7: Consecuencias (MEJORADO) -->
     <div class="slide" id="slide-7">
-        <h3 class="animate-up">Algoritmo</h3>
-        <h2 class="animate-up delay-1">Motor de Consecuencias</h2>
-        <div class="grid-2 animate-up delay-2">
+        <h3 class="animate-up">Aprendizaje</h3>
+        <h2 class="animate-up delay-1">Causa y Efecto</h2>
+        <p class="animate-up delay-2">El simulador permite cometer errores fatales en un entorno seguro, para no cometerlos en la vida real.</p>
+
+        <div class="grid-2 animate-up delay-3">
             <div>
-                <h4>Impacto Inmediato</h4>
-                <p>Las barras suben o bajan al instante.</p>
-                <div class="card" style="margin-top:1rem;">
-                    <p style="font-size: 0.9rem;">Ej: Si pagas un rescate Ransomware ➔ Finanzas baja drásticamente, Datos se recupera.</p>
+                <h4>Impacto Inmediato (Táctico)</h4>
+                <p>Feedback visual instantáneo.</p>
+                <div class="card" style="margin-top:1rem; border-left: 3px solid #22c55e;">
+                    <p style="font-size: 0.9rem;"><strong>Ejemplo Claro:</strong><br>Comunicar transparentemente el incidente a la prensa calma a los inversores (Reputación sube), aunque admitir la falla baje levemente el valor de la acción.</p>
                 </div>
             </div>
             <div>
-                <h4>Efecto Mariposa (Diferido)</h4>
-                <p>Una decisión en la Hora 2 afecta la Hora 48.</p>
-                <div class="card" style="margin-top:1rem;">
-                    <p style="font-size: 0.9rem;">Ej: No activar el generador al inicio ➔ Pérdida de cadena de frío 20 horas después.</p>
+                <h4>Impacto Diferido (Estratégico)</h4>
+                <p>El "Efecto Mariposa" de la negligencia.</p>
+                <div class="card" style="margin-top:1rem; border-left: 3px solid #ef4444;">
+                    <p style="font-size: 0.9rem;"><strong>Ejemplo Claro:</strong><br>Si decides <strong>NO</strong> revisar los generadores de respaldo en la Hora 2 para "ahorrar tiempo", el hospital se quedará sin luz en plena cirugía en la Hora 48.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 8: Evaluación (NUEVO) -->
+    <!-- Slide 8: Evaluación -->
     <div class="slide" id="slide-8">
         <h3 class="animate-up">Retroalimentación</h3>
         <h2 class="animate-up delay-1">Auditoría ISO 22301</h2>
@@ -296,7 +297,7 @@
         </div>
     </div>
 
-    <!-- Slide 9: Ingeniería (Mantenido del código anterior) -->
+    <!-- Slide 9: Ingeniería -->
     <div class="slide" id="slide-9">
         <h3 class="animate-up">Ingeniería</h3>
         <h2 class="animate-up delay-1">Lógica y Funcionalidad</h2>
@@ -314,18 +315,14 @@
         </div>
     </div>
 
-    <!-- Slide 10: Video Demo (NUEVO) -->
+    <!-- Slide 10: Video Demo (ACTUALIZADO CON YOUTUBE) -->
     <div class="slide" id="slide-10">
         <h3 class="animate-up">Demostración</h3>
         <h2 class="animate-up delay-1">Video del Simulador</h2>
         <p class="animate-up delay-2">Recorrido por la interfaz y respuesta ante un incidente.</p>
         
         <div class="video-wrapper animate-up delay-3">
-            <!-- AQUÍ PEGAS TU CODIGO EMBED DE YOUTUBE O VIDEO LOCAL -->
-            <!-- Ejemplo: <iframe src="https://www.youtube.com/embed/TU_ID_AQUI" frameborder="0" allowfullscreen></iframe> -->
-            <div style="display: flex; justify-content: center; align-items: center; height: 100%; color: #666;">
-                <p>[ESPACIO RESERVADO PARA VIDEO]</p>
-            </div>
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Nn--b-1i85Y?si=L8FzE-r1jVq2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </div>
 
@@ -365,7 +362,7 @@
                 slide.classList.remove('active');
                 if (index === currentSlide) {
                     slide.classList.add('active');
-                    slide.scrollTop = 0; // Reset scroll al cambiar slide
+                    slide.scrollTop = 0; 
                 }
             });
             indicator.innerText = `${currentSlide + 1} / ${totalSlides}`;
@@ -411,3 +408,4 @@
     </script>
 </body>
 </html>
+
