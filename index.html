@@ -26,7 +26,7 @@
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            position: fixed; /* Evita rebote en iOS */
+            position: fixed;
         }
 
         .slide {
@@ -35,51 +35,51 @@
             transition: opacity var(--slide-transition), transform var(--slide-transition);
             transform: scale(0.95);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            padding: 4rem;
+            padding: 2rem 4rem; /* Ajustado padding */
             background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-            overflow-y: auto; /* Permite scroll si el contenido es mucho en pantallas pequeñas */
+            overflow-y: auto;
         }
 
         .slide.active { opacity: 1; visibility: visible; transform: scale(1); z-index: 10; }
 
         /* --- Tipografía --- */
-        h1 { font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 1rem; color: white; text-align: center; }
+        h1 { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 1rem; color: white; text-align: center; }
         h1 span { color: var(--accent); }
-        h2 { font-size: 2.5rem; margin-bottom: 2rem; border-left: 5px solid var(--accent); padding-left: 20px; }
+        h2 { font-size: 2.2rem; margin-bottom: 1.5rem; border-left: 5px solid var(--accent); padding-left: 20px; color: white; }
         h3 { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 1rem; text-align: center; }
-        p { font-size: 1.2rem; color: var(--text-dim); max-width: 800px; line-height: 1.6; margin-bottom: 2rem; text-align: center; }
+        p { font-size: 1.1rem; color: var(--text-dim); max-width: 900px; line-height: 1.6; margin-bottom: 1.5rem; text-align: center; }
+        li { color: var(--text-dim); margin-bottom: 0.5rem; }
 
         /* --- Layouts --- */
         .grid-2 {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; width: 100%; max-width: 1200px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; width: 100%; max-width: 1200px;
         }
 
         .card {
-            background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 15px;
+            background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 15px;
             border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s;
+            height: 100%; display: flex; flex-direction: column; justify-content: center;
         }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .card i { font-size: 2rem; color: var(--accent); margin-bottom: 1rem; }
+        .card i { font-size: 1.8rem; color: var(--accent); margin-bottom: 0.8rem; }
+        .card h4 { color: white; margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .card p { font-size: 0.9rem; text-align: left; margin-bottom: 0; }
 
-        /* --- Mockup --- */
-        .browser-mockup {
-            background: #000; border-radius: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); overflow: hidden; border: 1px solid #333; width: 100%;
+        /* --- Listas Estilizadas --- */
+        .styled-list { list-style: none; text-align: left; padding: 0; }
+        .styled-list li { margin-bottom: 1rem; padding-left: 1.5rem; position: relative; font-size: 1rem; }
+        .styled-list li::before { content: "•"; color: var(--accent); font-weight: bold; font-size: 1.5rem; position: absolute; left: 0; top: -5px; }
+
+        /* --- Video Container --- */
+        .video-wrapper {
+            position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0; width: 100%; max-width: 900px;
+            background: #000; border-radius: 15px; border: 2px solid #333; overflow: hidden;
         }
-        .browser-header { background: #222; padding: 10px 15px; display: flex; gap: 8px; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; background: #555; }
-        .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
-        .sim-screen { padding: 20px; text-align: left; font-family: 'Roboto Mono', monospace; }
-        .progress-bar { height: 6px; background: #333; border-radius: 3px; margin: 10px 0; overflow: hidden; }
-        .fill { height: 100%; background: var(--accent); width: 0%; animation: load 2s ease-out forwards; }
-        @keyframes load { to { width: 75%; } }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
         /* --- Controles --- */
-        .controls {
-            position: fixed; bottom: 30px; right: 40px; display: flex; gap: 15px; z-index: 100; align-items: center;
-        }
-        .btn-nav {
-            background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center;
-        }
+        .controls { position: fixed; bottom: 20px; right: 40px; display: flex; gap: 15px; z-index: 100; align-items: center; }
+        .btn-nav { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; }
         .btn-nav:hover { background: var(--accent); border-color: var(--accent); }
         .page-indicator { font-family: 'Roboto Mono'; color: var(--text-dim); font-size: 0.9rem; }
 
@@ -90,22 +90,15 @@
 
         /* --- MEDIA QUERIES (RESPONSIVO MÓVIL) --- */
         @media (max-width: 768px) {
-            .slide { padding: 1.5rem; justify-content: flex-start; padding-top: 4rem; }
-            h1 { font-size: 2.8rem; }
-            h2 { font-size: 1.8rem; text-align: center; border-left: none; border-bottom: 3px solid var(--accent); padding-bottom: 10px; padding-left: 0; }
-            p { font-size: 1rem; text-align: justify; }
-            
+            .slide { padding: 1.5rem; padding-top: 4rem; justify-content: flex-start; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.6rem; text-align: center; border-left: none; border-bottom: 3px solid var(--accent); padding-bottom: 10px; padding-left: 0; }
+            p, li { font-size: 0.95rem; text-align: justify; }
             .grid-2 { grid-template-columns: 1fr; gap: 1.5rem; }
-            
-            /* Ajuste de nombres en portada */
             .integrantes-box { flex-direction: column; gap: 0.5rem !important; }
             .separator { display: none; }
-            
-            /* Ajuste de controles para móvil */
-            .controls { bottom: 15px; right: 50%; transform: translateX(50%); width: 100%; justify-content: center; }
+            .controls { bottom: 10px; right: 50%; transform: translateX(50%); width: 100%; justify-content: center; }
             .btn-nav { background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); }
-            
-            /* Ocultar iconos gigantes que ocupan mucho espacio */
             .giant-icon { display: none; }
         }
     </style>
@@ -154,109 +147,190 @@
         </div>
     </div>
 
-    <!-- Slide 3: La Solución -->
+    <!-- Slide 3: ¿Qué es? (NUEVO) -->
     <div class="slide" id="slide-3">
-        <h3 class="animate-up">La Solución</h3>
-        <h2 class="animate-up delay-1">Simulación Activa</h2>
-        
-        <div class="browser-mockup animate-up delay-2">
-            <div class="browser-header">
-                <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+        <h3 class="animate-up">Definición</h3>
+        <h2 class="animate-up delay-1">¿Qué es CRISIS72?</h2>
+        <div class="grid-2 animate-up delay-2">
+            <div>
+                <p>Es un simulador de <strong>entrenamiento inmersivo</strong> basado en la norma ISO 22301. Coloca al estudiante en el rol de Gerente de Crisis durante las primeras 72 horas tras un desastre.</p>
+                <div class="card" style="margin-top: 2rem; border-left: 3px solid var(--accent);">
+                    <ul class="styled-list" style="margin: 0;">
+                        <li><strong>Tipo:</strong> Serious Game (Juego educativo).</li>
+                        <li><strong>Duración:</strong> Simula 3 días en 15 minutos reales.</li>
+                        <li><strong>Objetivo:</strong> Sobrevivir sin sacrificar seguridad humana.</li>
+                    </ul>
+                </div>
             </div>
-            <div class="sim-screen">
-                <div style="display:flex; justify-content:space-between; color:#888; font-size:0.8rem; margin-bottom:10px;">
-                    <span>STATUS: CRÍTICO</span>
-                    <span>T+ 02:00 H</span>
-                </div>
-                <div style="color:white; font-size:1.1rem; margin-bottom:20px;">
-                    > ALERTA: CIBERATAQUE RANSOMWARE.<br>
-                    > SISTEMAS BLOQUEADOS.<br>
-                    > ¿ACCIÓN PRIORITARIA?
-                </div>
-                <div style="background:#222; padding:10px; margin-bottom:5px; border-left:3px solid var(--accent); font-size:0.9rem;">
-                    A. Pagar rescate (Riesgo Legal)
-                </div>
-                <div style="background:#222; padding:10px; margin-bottom:5px; border-left:3px solid #555; font-size:0.9rem;">
-                    B. Desconectar red (Impacto Operativo)
-                </div>
-                <div style="margin-top:20px;">
-                    <span style="color:#888; font-size:0.7rem;">Integridad Datos</span>
-                    <div class="progress-bar"><div class="fill"></div></div>
-                </div>
+            <div style="text-align: center;">
+                <i class="fas fa-gamepad" style="font-size: 10rem; color: rgba(255,255,255,0.05);"></i>
             </div>
         </div>
     </div>
 
-    <!-- Slide 4: Metodología -->
+    <!-- Slide 4: Escenarios (NUEVO) -->
     <div class="slide" id="slide-4">
-        <h3 class="animate-up">Marco Teórico</h3>
-        <h2 class="animate-up delay-1">ISO 22301</h2>
-        <div class="grid-2 animate-up delay-2" style="gap: 1.5rem;">
+        <h3 class="animate-up">Mecánica</h3>
+        <h2 class="animate-up delay-1">Selección del Escenario</h2>
+        <p class="animate-up delay-2">El simulador no es lineal. Al iniciar, el usuario elige entre 5 amenazas críticas, cargando un árbol de decisiones distinto para cada una.</p>
+        
+        <div class="grid-2 animate-up delay-3" style="gap: 1.5rem; align-items: start;">
+            <ul class="styled-list">
+                <li><strong style="color:white;">Terremoto Mayor:</strong> Daños estructurales y crisis humanitaria.</li>
+                <li><strong style="color:white;">Inundación Masiva:</strong> Accesibilidad y daños por agua.</li>
+                <li><strong style="color:white;">Ransomware:</strong> Protección de datos y extorsión.</li>
+            </ul>
+            <ul class="styled-list">
+                <li><strong style="color:white;">Incendio Estructural:</strong> Evacuación y pérdida de activos.</li>
+                <li><strong style="color:white;">Falla Energética:</strong> Dependencia de servicios críticos.</li>
+                <li style="font-style: italic; color: var(--accent); margin-top: 1rem;">* Gestión de riesgos específica por contexto.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 5: Recursos (NUEVO) -->
+    <div class="slide" id="slide-5">
+        <h3 class="animate-up">Interfaz</h3>
+        <h2 class="animate-up delay-1">Gestión de Recursos</h2>
+        <p class="animate-up delay-2">Es un juego de <strong>Suma Cero</strong>. Para proteger un recurso, a menudo debes sacrificar otro. Si un indicador llega a 0%, es Game Over.</p>
+        
+        <div class="grid-2 animate-up delay-3" style="gap: 1.5rem;">
             <div class="card">
-                <i class="fas fa-chess-board"></i>
-                <h4>Liderazgo (Cl. 5)</h4>
-                <p style="font-size:0.9rem; margin-bottom:0;">Capacidad de tomar control y priorizar la seguridad humana.</p>
+                <i class="fas fa-users"></i>
+                <h4>Personal</h4>
+                <p>Salud física y psicológica de los empleados.</p>
             </div>
             <div class="card">
-                <i class="fas fa-clipboard-check"></i>
-                <h4>Planificación (Cl. 6)</h4>
-                <p style="font-size:0.9rem; margin-bottom:0;">Uso de protocolos vs. improvisación.</p>
+                <i class="fas fa-server"></i>
+                <h4>Infraestructura</h4>
+                <p>Capacidad operativa y datos técnicos.</p>
             </div>
             <div class="card">
-                <i class="fas fa-cogs"></i>
-                <h4>Operación (Cl. 8)</h4>
-                <p style="font-size:0.9rem; margin-bottom:0;">Gestión de recursos finitos bajo estrés.</p>
+                <i class="fas fa-globe"></i>
+                <h4>Reputación</h4>
+                <p>Imagen pública ante la sociedad.</p>
             </div>
             <div class="card">
-                <i class="fas fa-chart-line"></i>
-                <h4>Evaluación (Cl. 9)</h4>
-                <p style="font-size:0.9rem; margin-bottom:0;">Auditoría automática post-incidente.</p>
+                <i class="fas fa-coins"></i>
+                <h4>Finanzas</h4>
+                <p>Recursos para gastar en la emergencia.</p>
             </div>
         </div>
     </div>
 
-    <!-- Slide 5: Ingeniería (Lógica) -->
-    <div class="slide" id="slide-5">
-        <h3 class="animate-up">Ingeniería del Proyecto</h3>
+    <!-- Slide 6: Toma de Decisiones (NUEVO) -->
+    <div class="slide" id="slide-6">
+        <h3 class="animate-up">Núcleo</h3>
+        <h2 class="animate-up delay-1">Mecánica de Decisión</h2>
+        <div class="grid-2 animate-up delay-2">
+            <div class="card" style="border-top: 3px solid var(--accent);">
+                <h4>1. El "Inject" (Evento)</h4>
+                <p>El reloj avanza (ej. T+ 04:00) y aparece una situación nueva.</p>
+                <p style="font-size: 0.9rem; color: #aaa; margin-top:0.5rem;"><em>"El fuego se acerca a los servidores..."</em></p>
+            </div>
+            <div class="card" style="border-top: 3px solid var(--accent);">
+                <h4>2. El Dilema</h4>
+                <ul class="styled-list" style="font-size: 0.85rem;">
+                    <li><strong>Opción A:</strong> Alto riesgo personal / Salva datos.</li>
+                    <li><strong>Opción B:</strong> Bajo riesgo personal / Pierde datos.</li>
+                    <li><strong>Opción C:</strong> Incertidumbre alta.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="animate-up delay-3" style="margin-top: 2rem; text-align: center;">
+            <div style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 1rem 2rem; border-radius: 50px; border: 1px solid #ef4444; display: inline-flex; align-items: center; gap: 10px;">
+                <i class="fas fa-stopwatch"></i> <strong>Presión de Tiempo:</strong> 2 minutos para decidir.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Consecuencias (NUEVO) -->
+    <div class="slide" id="slide-7">
+        <h3 class="animate-up">Algoritmo</h3>
+        <h2 class="animate-up delay-1">Motor de Consecuencias</h2>
+        <div class="grid-2 animate-up delay-2">
+            <div>
+                <h4>Impacto Inmediato</h4>
+                <p>Las barras suben o bajan al instante.</p>
+                <div class="card" style="margin-top:1rem;">
+                    <p style="font-size: 0.9rem;">Ej: Si pagas un rescate Ransomware ➔ Finanzas baja drásticamente, Datos se recupera.</p>
+                </div>
+            </div>
+            <div>
+                <h4>Efecto Mariposa (Diferido)</h4>
+                <p>Una decisión en la Hora 2 afecta la Hora 48.</p>
+                <div class="card" style="margin-top:1rem;">
+                    <p style="font-size: 0.9rem;">Ej: No activar el generador al inicio ➔ Pérdida de cadena de frío 20 horas después.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Evaluación (NUEVO) -->
+    <div class="slide" id="slide-8">
+        <h3 class="animate-up">Retroalimentación</h3>
+        <h2 class="animate-up delay-1">Auditoría ISO 22301</h2>
+        <p class="animate-up delay-2">El sistema no califica solo "sobrevivir", sino <strong>cómo</strong> lo hiciste.</p>
+        
+        <div class="grid-2 animate-up delay-3" style="gap: 1.5rem;">
+            <div class="card">
+                <i class="fas fa-chess-king"></i>
+                <h4>Liderazgo</h4>
+                <p style="font-size:0.9rem; margin:0;">¿Tomaste el control o fuiste pasivo?</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-clipboard-list"></i>
+                <h4>Planificación</h4>
+                <p style="font-size:0.9rem; margin:0;">¿Usaste protocolos o improvisaste?</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-hands-helping"></i>
+                <h4>Soporte</h4>
+                <p style="font-size:0.9rem; margin:0;">¿Comunicaste bien a las partes interesadas?</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-heartbeat"></i>
+                <h4>Operación</h4>
+                <p style="font-size:0.9rem; margin:0;">¿Priorizaste la vida humana sobre lo material?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Ingeniería (Mantenido del código anterior) -->
+    <div class="slide" id="slide-9">
+        <h3 class="animate-up">Ingeniería</h3>
         <h2 class="animate-up delay-1">Lógica y Funcionalidad</h2>
         <div class="grid-2 animate-up delay-2" style="gap: 1.5rem;">
             <div class="card" style="border-left: 3px solid #22c55e;">
                 <i class="fas fa-network-wired" style="color:#22c55e;"></i>
                 <h4>Árbol de Decisiones</h4>
-                <p style="font-size:0.9rem;">Algoritmo basado en consecuencias probabilísticas y matrices de riesgo.</p>
-            </div>
-            <div class="card" style="border-left: 3px solid #facc15;">
-                <i class="fas fa-stopwatch" style="color:#facc15;"></i>
-                <h4>Presión Temporal</h4>
-                <p style="font-size:0.9rem;">Temporizadores reales para evaluar respuesta bajo estrés.</p>
+                <p style="font-size:0.9rem; margin:0;">Algoritmo basado en consecuencias probabilísticas.</p>
             </div>
             <div class="card" style="border-left: 3px solid #3b82f6;">
                 <i class="fas fa-file-contract" style="color:#3b82f6;"></i>
-                <h4>Auditoría ISO</h4>
-                <p style="font-size:0.9rem;">Generación de reportes PDF alineados a métricas de cumplimiento.</p>
-            </div>
-            <div class="card" style="border-left: 3px solid #ef4444;">
-                <i class="fas fa-laptop-medical" style="color:#ef4444;"></i>
-                <h4>Accesibilidad</h4>
-                <p style="font-size:0.9rem;">Plataforma web multiplataforma para entrenamiento remoto.</p>
+                <h4>Auditoría Automática</h4>
+                <p style="font-size:0.9rem; margin:0;">Generación de reportes PDF alineados a métricas ISO.</p>
             </div>
         </div>
     </div>
 
-    <!-- Slide 6: Arquitectura (Tecnología) - SLIDE NUEVO -->
-    <div class="slide" id="slide-6">
-        <h3 class="animate-up">Arquitectura Técnica</h3>
-        <h2 class="animate-up delay-1">Stack de Desarrollo</h2>
-        <ul class="animate-up delay-2" style="list-style: none; font-size: 1.3rem; line-height: 2.5; text-align: left;">
-            <li><i class="fab fa-html5" style="color:var(--accent); width:40px; text-align:center;"></i> <strong>HTML5 / CSS3:</strong> Diseño Responsivo Adaptable.</li>
-            <li><i class="fab fa-js" style="color:#f7df1e; width:40px; text-align:center;"></i> <strong>JavaScript ES6+:</strong> Motor lógico de eventos.</li>
-            <li><i class="fas fa-robot" style="color:#22d3ee; width:40px; text-align:center;"></i> <strong>Lógica Difusa:</strong> Resultados variables por contexto.</li>
-            <li><i class="fas fa-cloud-upload-alt" style="color:#ef4444; width:40px; text-align:center;"></i> <strong>Despliegue:</strong> GitHub Pages & Hosting Web.</li>
-        </ul>
+    <!-- Slide 10: Video Demo (NUEVO) -->
+    <div class="slide" id="slide-10">
+        <h3 class="animate-up">Demostración</h3>
+        <h2 class="animate-up delay-1">Video del Simulador</h2>
+        <p class="animate-up delay-2">Recorrido por la interfaz y respuesta ante un incidente.</p>
+        
+        <div class="video-wrapper animate-up delay-3">
+            <!-- AQUÍ PEGAS TU CODIGO EMBED DE YOUTUBE O VIDEO LOCAL -->
+            <!-- Ejemplo: <iframe src="https://www.youtube.com/embed/TU_ID_AQUI" frameborder="0" allowfullscreen></iframe> -->
+            <div style="display: flex; justify-content: center; align-items: center; height: 100%; color: #666;">
+                <p>[ESPACIO RESERVADO PARA VIDEO]</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Slide 7: Conclusiones -->
-    <div class="slide" id="slide-7">
+    <!-- Slide 11: Conclusiones -->
+    <div class="slide" id="slide-11">
         <h1 class="animate-up">Conclusiones</h1>
         <p class="animate-up delay-1">
             CRISIS72 transforma la capacitación pasiva en una experiencia activa de aprendizaje.
@@ -276,7 +350,7 @@
     <!-- Controles -->
     <div class="controls">
         <button class="btn-nav" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
-        <span class="page-indicator" id="page-indicator">1 / 7</span>
+        <span class="page-indicator" id="page-indicator">1 / 11</span>
         <button class="btn-nav" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
     </div>
 
@@ -291,6 +365,7 @@
                 slide.classList.remove('active');
                 if (index === currentSlide) {
                     slide.classList.add('active');
+                    slide.scrollTop = 0; // Reset scroll al cambiar slide
                 }
             });
             indicator.innerText = `${currentSlide + 1} / ${totalSlides}`;
@@ -330,9 +405,7 @@
         });
 
         function handleSwipe() {
-            // Deslizar a izquierda = Siguiente
             if (touchEndX < touchStartX - 50) nextSlide();
-            // Deslizar a derecha = Anterior
             if (touchEndX > touchStartX + 50) prevSlide();
         }
     </script>
